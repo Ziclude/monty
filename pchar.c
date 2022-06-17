@@ -8,7 +8,7 @@
 
 void pchar(stack_t **stack, unsigned int line_number)
 {
-if (stack == '\0' || stack[0] = '\0')
+if (stack == '\0' || stack[0] == '\0')
 {
 fprintf(stderr, "L%i: can't pchar, stack empty\n", line_number);
 release(NULL, NULL, 'r');

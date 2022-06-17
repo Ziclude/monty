@@ -42,6 +42,7 @@ void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 /**
+ * struct var - global
  * @point: pointer
  * Description: global variable
  */
