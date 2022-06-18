@@ -3,28 +3,21 @@
 /**
  * swap - swap two first elements of stack
  * @stack: stack element
- * @last_line: instruction's number
+ * @line_number: instruction's number
  */
 
-void swap(stack_t **stack, unsigned int last_line)
+void swap(stack_t **stack, unsigned int line_number)
 {
-stack_t *first, *second;
-if (stack[0] == '\0' || stack[0]->next == '\0')
+stack_t *first = NULL;
+int first_n = 0;
+if (!stack || !*stack || !((*stack)->next))
 {
-fprintf(stderr, "L%i: can't swap, stack too short\n", last_line);
+fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 exit(EXIT_FAILURE);
 }
-first = stack[0];
-second = stack[0]->next;
-if (first->next->next != '\0')
-{
-first->next = second->next;
-second->next->prev = first;
-}
-else
-first->next = '\0';
-first->prev = second;
-second->next = first;
-second->prev = '\0';
-*stack = second;
+first = *stack;
+first_n = first->n;
+first->n = first_n;
+first->n = first->next->n;
+first->next->n = first_n;
 }

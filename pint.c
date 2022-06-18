@@ -8,13 +8,10 @@
 
 void pint(stack_t **stack, unsigned int line_number)
 {
-if (*stack == '\0')
+if (!stack || !(*stack))
 {
-fprintf(stderr, "L%i: can't pint, stack empty\n", line_number);
-release(NULL, NULL, 'r');
-free_dlist(*stack);
-free(global.point);
+fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 exit(EXIT_FAILURE);
 }
-printf("%i\n", stack[0]->n);
+printf("%d\n", (*stack)->n);
 }

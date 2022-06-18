@@ -6,17 +6,19 @@
  * @line_number: instruction's line
  */
 
-void rotr(stack_t **stack, unsigned int __attribute__((unused))line_number)
+void rotr(stack_t **stack, unsigned int line_number)
 {
-stack_t *tap = '\0', *bott = '\0';
-if (stack == '\0' || *stack == '\0')
+stack_t *tap, *bott;
+(void) line_number;
+if (!stack || !*stack || !(*stack)->next)
 return;
-tap = *stack, bott = *stack;
-while (bott->next != '\0')
-bott = bott->next;
-tap->prev = bott;
-bott->next = tap;
-bott->prev->next = '\0';
-bott->prev = '\0';
-stack[0] = bott;
+tap = *stack;
+while (tap->next)
+tap = tap->next;
+bott = tap->prev;
+tap->next = *stack;
+tap->prev = NULL;
+bott->next = NULL;
+(*stack)->bott = tap;
+*stack = tap;
 }

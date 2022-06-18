@@ -8,19 +8,13 @@
 
 void sub(stack_t **stack, unsigned int line_number)
 {
-stack_t *first, *second;
-if (*stack == NULL || (*stack)->next == NULL)
+int diff;
+if (!stack || !*stack || !((*stack)->next))
 {
-fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
-release(NULL, NULL, 'r');
-free_dlist(*stack);
-free(global.point);
+fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
 exit(EXIT_FAILURE);
 }
-first = *stack;
-second = (*stack)->next;
-second->n -= first->n;
-*stack = second;
-second->prev = NULL;
-free(first);
+diff = ((*stack)->next->n) - ((*stack)->n);
+pop(stack, line_number);
+(*stack)->n = diff;
 }
