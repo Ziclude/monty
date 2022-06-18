@@ -9,15 +9,19 @@
 void pop(stack_t **stack, unsigned int last_line)
 {
 stack_t *trp;
-if (*stack == '\0')
+if (!stack || !*stack)
 {
 fprintf(stderr, "L%i: can't pop an empty stack\n", last_line);
-release(NULL, NULL, 'r');
-free_dlist(*stack);
-free(global.point);
+/*release(NULL, NULL, 'r');*/
+/*free_dlist(*stack);*/
+/*free(global.point);*/
 exit(EXIT_FAILURE);
 }
-trp = *stack;
-*stack = stack[0]->next;
-free(trp);
+trp = (*stack)->next;
+free(*stack);
+*stack = trp;
+/*free(trp);*/
+if (!*stack)
+return;
+(*stack)->prev = NULL;
 }
