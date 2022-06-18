@@ -9,27 +9,20 @@
 
 void mod(stack_t **stack, unsigned int line_number)
 {
-stack_t *first, *second;
-if (*stack == NULL || (*stack)->next == NULL)
+int modulo;
+if (!stack || !*stack || !((*stack)->next))
 {
-fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
-release(NULL, NULL, 'r');
-free_dlist(*stack);
-free(global.point);
+fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
 exit(EXIT_FAILURE);
+return;
 }
-first = *stack;
-second = (*stack)->next;
-if (first->n == 0)
+if (((*stack)->n) == 0)
 {
-fprintf(stderr, "L%u: division by zero\n", line_number);
-release(NULL, NULL, 'r');
-free_dlist(*stack);
-free(global.point);
+fprintf(stderr, "L%d: division by zero\n", line_number);
 exit(EXIT_FAILURE);
+return;
 }
-second->n %= first->n;
-*stack = second;
-second->prev = NULL;
-free(first);
+modulo = ((*stack)->next->n) % ((*stack)->n);
+pop(stack, line_number);
+(*stack)->n = modulo;
 }

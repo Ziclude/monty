@@ -8,19 +8,14 @@
 
 void mul(stack_t **stack, unsigned int line_number)
 {
-stack_t *first, *second;
-if (*stack == NULL || (*stack)->next == NULL)
+int prod;
+if (!stack || !*stack || !((*stack)->next))
 {
-fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
-release(NULL, NULL, 'r');
-free_dlist(*stack);
-free(global.point);
+fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
 exit(EXIT_FAILURE);
+return;
 }
-first = *stack;
-second = (*stack)->next;
-second->n *= first->n;
-*stack = second;
-second->prev = NULL;
-free(first);
+prod = ((*stack)->next->n) * ((*stack)->n);
+pop(stack, line_number);
+(*stack)->n = prod;
 }

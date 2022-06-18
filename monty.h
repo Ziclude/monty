@@ -1,13 +1,27 @@
 #ifndef MONTY_H
 #define MONTY_H
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <ctype.h>
+#include <stddef.h>
+
+#define INSTRUCTIONS \
+{ \
+{"push", push}, \
+{"pall", pall}, \
+{"pint", pint}, \
+{"pop", pop}, \
+{"swap", swap}, \
+{"nop", nop}, \
+{"div", _div}, \
+{"mul", mul}, \
+{"add", add}, \
+{"mod", mod}, \
+{"sub", sub}, \
+{"pchar", pchar}, \
+{"rotr", rotr}, \
+{"pstr", pstr}, \
+{"rotl", rotl}, \
+{NULL, NULL} \
+} \
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -43,39 +57,39 @@ void (*f)(stack_t **stack, unsigned int line_number);
 
 /**
  * struct var - global
+ * @data: stack mode
  * @point: pointer
  * Description: global variable
  */
 
 typedef struct var
 {
-char **point
+int data;
+char *point
 } var_t;
 
 var_t global;
 
-char **for_line(char **inpt);
-void get_function(stack_t **tap, unsigned int line_number);
+stack_t *adnode(stack_t **stack, const int n);
+stack_t  *qnode(stack_t **stack, const int n);
+void free_stck(stack_t *stack);
+size_t prtstck(const stack_t *stack);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
-char **for_line(char **inpt);
-void free_dble(char **p);
-void free_dlist(stack_t *hd);
-void release(FILE **streaming, char **montcod, char op);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 void sub(stack_t **stack, unsigned int line_number);
 void _div(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
-int check(char *num);
-void delnwline(char **del);
-int emptcod(char *string);
 void swap(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
+void opcod(stack_t **stack, char *string, unsigned int line_number);
+int is_dig(char *str);
+int isnum(char *str);
 
 #endif /*MONTY_H*/
