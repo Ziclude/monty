@@ -8,21 +8,17 @@
 
 void pchar(stack_t **stack, unsigned int line_number)
 {
-if (stack == '\0' || stack[0] == '\0')
+if (!stack || !(*stack))
 {
-fprintf(stderr, "L%i: can't pchar, stack empty\n", line_number);
-release(NULL, NULL, 'r');
-free_dlist(*stack);
-free(var.point);
+fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
 exit(EXIT_FAILURE);
+return;
 }
-if (stack[0]->n < 32 || stack[0]->n > 126)
+if (isacii((*stack)->n) == 0)
 {
-fprintf(stderr, "L%i: can't pchar, value out of range\n", line_number);
-release(NULL, NULL, 'r');
-free_dlist(*stack);
-free(var.point);
+fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
 exit(EXIT_FAILURE);
+return;
 }
-printf("%c\n", stack[0]->n);
+printf("%c\n", (*stack)->n);
 }
