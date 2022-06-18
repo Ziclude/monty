@@ -14,7 +14,7 @@ fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
 exit(EXIT_FAILURE);
 return;
 }
-if (isacii((*stack)->n) == 0)
+if (((*stack)->n) < 32 || ((*stack)->n) > 126)
 {
 fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
 exit(EXIT_FAILURE);

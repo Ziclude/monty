@@ -2,21 +2,21 @@
 
 /**
  * isdig - checks if is digit
- * @str: string
+ * @string: string
  * Return: 1 if success, 0 if not
  */
 
-int isdig(char *str)
+int isdig(char *string)
 {
-if (!str || *str == '\0')
+if (!string || *string == '\0')
 return (0);
-if (*str == '-')
-str++;
-while (*str)
+if (*string == '-')
+string++;
+while (*string)
 {
-if (isdig(*str) == 0)
+if (isdig(&*string) == 0)
 return (0);
-str++;
+string++;
 }
 return (1);
 }

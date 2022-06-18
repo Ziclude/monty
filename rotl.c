@@ -12,12 +12,12 @@ stack_t *tap, *bott;
 (void) line_number;
 if (!stack || !*stack || !(*stack)->next)
 return;
-top = bott = *stack;
+tap = bott = *stack;
 while (bott->next)
 bott = bott->next;
-bott->next = top;
-top->prev = bott;
-*stack = top->next;
+bott->next = tap;
+tap->prev = bott;
+*stack = tap->next;
 (*stack)->prev->next = NULL;
 (*stack)->prev = NULL;
 }

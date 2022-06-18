@@ -61,7 +61,7 @@ void (*f)(stack_t **stack, unsigned int line_number);
 /**
  * struct var - global
  * @data: stack mode
- * @point: pointer
+ * @point: argument of string
  * Description: global variable
  */
 
@@ -93,7 +93,7 @@ void pchar(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void opcod(stack_t **stack, char *string, unsigned int line_number);
-int isdig(char *str);
+int isdig(char *string);
 int isnum(char *str);
 
 #endif /*MONTY_H*/

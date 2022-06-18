@@ -19,6 +19,6 @@ bott = tap->prev;
 tap->next = *stack;
 tap->prev = NULL;
 bott->next = NULL;
-(*stack)->bott = tap;
+(*stack)->prev = tap;
 *stack = tap;
 }

@@ -17,5 +17,5 @@ break;
 putchar((char) trp->n);
 trp = trp->next;
 }
-putchar("\n");
+putchar('\n');
 }
