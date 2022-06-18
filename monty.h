@@ -2,6 +2,9 @@
 #define MONTY_H
 #include <stdlib.h>
 #include <stddef.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
 
 #define INSTRUCTIONS \
 { \
@@ -65,7 +68,7 @@ void (*f)(stack_t **stack, unsigned int line_number);
 typedef struct var
 {
 int data;
-char *point
+char *point;
 } var_t;
 
 var_t global;
@@ -88,8 +91,9 @@ void swap(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_number);
 void opcod(stack_t **stack, char *string, unsigned int line_number);
-int is_dig(char *str);
+int isdig(char *str);
 int isnum(char *str);
 
 #endif /*MONTY_H*/
